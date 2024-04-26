@@ -42,3 +42,18 @@ while (MyReader.Read())
 MyReader.Close();
 
 #endregion
+
+#region LINQ
+
+Console.WriteLine("LINQ");
+
+List<string> students = new List<string>() { "Смирнов", "Петров", "Яковлев", "Сидоров", "Иванов"};
+
+var studentsFiltred = students.Where(s => s.ToUpper().StartsWith("С")).OrderBy(s => s).Select(s => s[2]);
+
+foreach (var student in studentsFiltred)
+{
+    Console.WriteLine(student);
+}
+
+#endregion
