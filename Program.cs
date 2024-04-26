@@ -1,5 +1,10 @@
-﻿using System.Data.Odbc;
+﻿using System.Data;
+using System.Data.Odbc;
+using System.Data.OleDb;
 
+#region Odbc
+
+Console.WriteLine("Odbc");
 string MyConString = "DRIVER={MySQL ODBC 8.0 Unicode Driver};" +
             "SERVER=localhost;" +
             "DATABASE=mospolylabdb;" +
@@ -16,3 +21,24 @@ while (odbcDataReader.Read())
 {
     Console.WriteLine(odbcDataReader.GetString(0));
 }
+#endregion
+
+#region OleDB
+
+Console.WriteLine("Ole");
+var myConn = new OleDbConnection("Provider=SQLOLEDB;Data Source=RDESKTOP\\MSSQLSERVER06;database=rufov; Integrated Security=SSPI");
+
+myConn.Open();
+string sql = "SELECT * FROM dbo.Table_1";
+OleDbCommand cmd = new OleDbCommand(sql, myConn);
+
+OleDbDataReader MyReader = cmd.ExecuteReader();
+
+while (MyReader.Read())
+{
+    Console.WriteLine(MyReader["test"].ToString());
+}
+
+MyReader.Close();
+
+#endregion
